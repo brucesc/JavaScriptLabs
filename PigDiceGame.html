@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>jQuery</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script lang="javascript">
+        var rolls = [];
+        var total = 0;
+        var nbrRolls = 0;
+        $().ready(function(){
+        $("#btn").click(function(){
+            roll = Math.floor(Math.random()*6)+1;
+
+            if( roll <= 6 && roll > 1){
+                $("#lbl").text("");
+                $("#lbl2").text("");
+                 rolls.push(roll);
+                 total+=roll;
+                 nbrRolls++;
+                $("#lbl").text(rolls.join(", ") + " The Total Score is: " + total + " Total Rolls: " + nbrRolls);
+            }
+
+            if (roll == 1) {
+              $("#lbl").text(rolls.join(", ") + " The Total Score is: " + total + " Total Rolls: " + nbrRolls);
+                $("#lbl2").text("GAME OVER");
+                rolls = [];
+                total = 0;
+                nbrRolls = 0;
+
+            };
+        });
+        });
+	
+	</script>
+</head>
+<body>
+    <button id="btn">Play Pig Dice!</button>
+    <label id="lbl"></label>
+    <br/>
+    <label id="lbl2"></label>
+</body>
+</html>

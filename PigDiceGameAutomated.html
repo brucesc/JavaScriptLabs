@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>jQuery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script lang="javascript">
+
+        var rolls = [];
+        var total = 0;
+        var nbrRolls = 0;
+        var highScore = [];
+        $().ready(function () {
+            $("#btn").click(function () {
+                roll = Math.floor(Math.random() * 6) + 1;
+
+                while (roll != 1) {
+                    rolls.push(roll);
+                    total += roll;
+                    nbrRolls++;
+                    RollTheDie()
+                }
+                highScore.push(total);
+                    $("#lbl").text(rolls.join(", ") + " The Total Score is: " + total + " Total Rolls: " + nbrRolls);
+                    $("#lbl2").text("GAME OVER");
+
+                function RollTheDie() {
+                    roll = Math.floor(Math.random() * 6) + 1;
+                }
+
+                
+                    rolls = [];
+                    total = 0;
+                    nbrRolls = 0;                
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <button id="btn">Play Pig Dice!</button>
+    <label id="lbl"></label>
+    <br/>
+    <label id="lbl2"></label>
+    <table id="HighScores"></table>
+</body>
+
+</html>
