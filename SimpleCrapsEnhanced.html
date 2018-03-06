@@ -17,10 +17,10 @@
                 switch (roll){
                     case 7: case 11:
                         youWin();
-                        break;
+                    break;
                     case 2: case 3: case 12:
                         youLose();
-                        break;
+                    break;
                     default:
                         targetNbr = roll;
                         Reroll();
@@ -50,7 +50,7 @@
             Rolls.push(roll)
             Win++;
             $("#lbl").text("You rolled: " + Rolls.join(", ") + " YOU WIN!!");
-            $("#lbl2").text("Wins: " + Win + "Loses: " + Lose);
+            $("#lbl2").text("Wins: " + Win + " Loses: " + Lose);
             Rolls = []
         }
         
