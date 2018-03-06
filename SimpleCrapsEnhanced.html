@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>jQuery</title>
+    <title>Play Craps!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -11,55 +11,62 @@
         var Lose = 0;
         var Rolls = [];
 
-
         $().ready(function () {
             $("#btn").click(function () {
                 RollTheDice()
-               switch (roll){
-                    case 7 || 11:
-                       Win++;
-                       $("#lbl").text("You rolled a(n): " + roll + " YOU WIN!!");
-                       $("#lbl2").text("Wins: " + Win + " Loses: " + Lose);
-                    break;
-                    case 2 || 3 || 12:
-                       Lose++;
-                       $("#lbl").text("You rolled a(n): " + roll + " You lose, please try again!");
-                       $("#lbl2").text("Wins: " + Win + " Loses: " + Lose);
-                    break;
+                switch (roll){
+                    case 7: case 11:
+                        youWin();
+                        break;
+                    case 2: case 3: case 12:
+                        youLose();
+                        break;
                     default:
                         targetNbr = roll;
-                        Rolls.push(roll);
-                        RollTheDice()
+                        Reroll();
                         while (roll != targetNbr && roll != 7) {
-                            Rolls.push(roll);
-                            RollTheDice();
-                            }
+                            Reroll();
+                        }
                             switch (roll){
                                 case targetNbr:
-                                    Rolls.push(roll)
-                                    Win++;
-                                    $("#lbl").text("You rolled: " + Rolls.join(", ") + " YOU WIN!!");
-                                    $("#lbl2").text("Wins: " + Win + "Loses: " + Lose);
+                                    youWin();
                                 break;
                                 case 7:
-                                    Rolls.push(roll)
-                                    Lose++;
-                                    $("#lbl").text("You rolled: " + Rolls.join(", ") + " You lose, please try again!");
-                                    $("#lbl2").text("Wins: " + Win + " Loses: " + Lose);
+                                    youLose();
                                 break;
-                           }
-               }
-               Rolls = [];
+                            }
+                }
+            });           
         });
 
-            function RollTheDice() {
+        function RollTheDice() {
                 roll = 0;
                 die1 = Math.floor(Math.random() * 6) + 1;
                 die2 = Math.floor(Math.random() * 6) + 1;
                 roll = die1 + die2;
-            }
-        });
-        });
+        }
+
+        function youWin() {
+            Rolls.push(roll)
+            Win++;
+            $("#lbl").text("You rolled: " + Rolls.join(", ") + " YOU WIN!!");
+            $("#lbl2").text("Wins: " + Win + "Loses: " + Lose);
+            Rolls = []
+        }
+        
+        function youLose() {
+            Rolls.push(roll)
+            Lose++;
+            $("#lbl").text("You rolled: " + Rolls.join(", ") + " You lose, please try again!");
+            $("#lbl2").text("Wins: " + Win + " Loses: " + Lose);
+            Rolls = []
+        }
+
+        function Reroll() {
+            Rolls.push(roll);
+            RollTheDice();
+        }
+        
 
 
     </script>
